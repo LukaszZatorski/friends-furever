@@ -1,0 +1,4 @@
+Deface::Override.new(virtual_path:  'spree/orders/_form',
+                     name:          'change_colspan_for_sum',
+                     replace:       '.cart-total .lead',
+                     text:          '<td class="lead" colspan="2"><%= order_form.object.display_total %></td>')

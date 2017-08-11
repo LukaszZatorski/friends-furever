@@ -1,0 +1,81 @@
+<div id="inpost">
+  <h4 class="col-xs-6"><%= t('inpost.destination') %></h4>
+  <%= image_tag("https://s3-eu-west-1.amazonaws.com/furever/static_content/inpost.png", class: "inpost-logo") %>
+  <div class="well">
+    <select name="order[inpost_machine]" class="form-control select2" id="order_inpost_machine" data-zipcode="<%= @zipcode %>"></select>
+    <div class="get-more-container">
+      <a href="#" id="read_more_inpost"><%= t('inpost.read_more') %></a>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  inpost_ready = function(){
+    selected_shipping_method = $('input[type=radio]:checked', '#checkout_form_delivery').closest("label").data("name");
+
+    if(selected_shipping_method == 'inpost'){
+      $("#inpost").show();
+    } else {
+      $("#inpost").hide();
+    }
+
+    $('body').on('change', 'input[type=radio]', function(e){
+      if($(this).closest("label").data("name") == 'inpost'){
+        $("#inpost").show();
+      } else {
+        $("#inpost").hide();
+      }
+    })
+
+    zipcode = $('#order_inpost_machine').data('zipcode');
+
+    $.get( "https://api.paczkomaty.pl/?do=findnearestmachines&postcode=" + zipcode, function( data ) {
+      parse = jQuery.parseXML( data );
+      p = $(parse);
+      machines = p.find("machine");
+      jQuery.each(machines, function(i, v){
+        name = $(this).find("name").text();
+        postcode = $(this).find("postcode").text();
+        buildingnumber = $(this).find("buildingnumber").text();
+        locationdescription = $(this).find("locationdescription").text();
+        street = $(this).find("street").text();
+        town = $(this).find("town").text();
+        text = street + " " + buildingnumber + ", " + town + " " + postcode + ". " + name;
+        $('#order_inpost_machine').append($("<option></option>").attr("value",name).text(text));
+      })
+      $('.select2').select2({
+      theme: "bootstrap"
+      });
+    });
+
+    $('body').on('click', "#read_more_inpost", function(e){
+      e.preventDefault();
+      _this = $(this);
+      $('.get-more-container').html('<i class="fa fa-refresh fa-spin"></i>');
+      $('#order_inpost_machine').find('option').remove().end();
+      $('#order_inpost_machine').prop('disabled', 'disabled');
+      $.get( "https://api.paczkomaty.pl/?do=listmachines_xml", function( data ) {
+        parse = jQuery.parseXML( data );
+        p = $(parse);
+        machines = p.find("machine");
+        jQuery.each(machines, function(i, v){
+          name = $(this).find("name").text();
+          postcode = $(this).find("postcode").text();
+          buildingnumber = $(this).find("buildingnumber").text();
+          locationdescription = $(this).find("locationdescription").text();
+          street = $(this).find("street").text();
+          town = $(this).find("town").text();
+          text = street + " " + buildingnumber + ", " + town + " " + postcode + ". " + name;
+          $('#order_inpost_machine').append($("<option></option>").attr("value",name).text(text));
+        })
+        $('#order_inpost_machine').prop('disabled', false);
+        $('.get-more-container').html('');
+      });
+    })
+  }
+
+  $(document).ready(inpost_ready)
+  $(document).on('page:load', inpost_ready)
+
+</script>

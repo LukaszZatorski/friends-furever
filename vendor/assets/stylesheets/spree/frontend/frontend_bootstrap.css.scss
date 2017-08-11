@@ -1,0 +1,204 @@
+@import "variables";
+
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.container {
+  flex: 1;
+}
+
+// -- Home and Taxon header
+
+.home-page-title, .taxon-title {
+  display: flex;
+  justify-content: center;
+}
+
+// -- Spree Custom Header and Footer ---------------------
+#spree-header {
+  margin-bottom: $line-height-computed;
+
+  #header {
+    #top-nav-bar {
+      ul {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+    background: $brand-primary;
+    a {
+      color: $nav-link-color;
+      &:hover, &:focus {
+        color: $nav-link-hover-color;
+      }
+    }
+  }
+
+  #taxonomies {
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow: 0px 1px 5px 0px rgba(229,229,229,1);
+    padding: 5px 0px;
+    @media (min-width: $grid-float-breakpoint) {
+      .navbar-collapse {
+        width: 83%;
+        .navbar-nav {
+          width: 100%;
+          display: flex;
+          height: 100px;
+        }
+      }
+    }
+    #logo {
+  	  width: auto;
+      float: left;
+      display: inline;
+      padding: 0 5px;
+      img {
+        max-width: 120px;
+        max-height: 120px;
+        margin-top: -30px;
+      }
+  	}
+    .navbar-toggle {
+      margin-top: 25px;
+    }
+    .icon-bar {
+      background-color: $brand-primary;
+    }
+    li {
+      margin: auto;
+    }
+    .nav a {
+      text-align: center;
+      color: $main-link-color;
+      font-size: 20px;
+      &:hover, &:focus {
+        color: $main-link-hover-color;
+      }
+    }
+  }
+
+  .navbar {
+    border: 0;
+    margin-bottom: 0;
+  }
+}
+
+#spree-footer {
+  background: $brand-primary;
+  padding-top: $padding-base-horizontal;
+  margin-top: $line-height-computed;
+  width: 100%;
+  .basic-info {
+    display: flex;
+    justify-content: center;
+    @media only screen and (min-width: $screen-md) {
+      justify-content: flex-start;
+    }
+  }
+  .navbar {
+    margin-bottom: 0;
+  }
+  .footer-link {
+    text-align: center;
+    a {
+      color: $nav-link-color;
+    }
+    a:hover, a:focus {
+      color: $nav-link-hover-color;
+    }
+  }
+  .social-area {
+    display: flex;
+    justify-content: center;
+    ul {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+// -- Spree Layout Custom Rules -------------------------
+
+.alert-notice { @extend .alert-success; }
+.alert-error, .alert-registration_error { @extend .alert-danger; }
+.alert-alert { @extend .alert-info; }
+
+.progress-steps {
+  margin-top: $line-height-computed;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+// Spree Icon Display
+
+.icon {
+  position: relative;
+  top: 50%;
+}
+
+// Pager styles
+
+.pager {
+  a {
+    color: $main-link-color;
+  }
+}
+
+// Center cart line items
+table {
+  &.table > tbody > tr {
+    &.line-item td, &.stock-item td {
+      vertical-align: middle;
+    }
+  }
+
+  &#line-items {
+    > tbody, > tfoot {
+      > tr > td {
+        vertical-align: middle;
+
+        &.order-qty {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+// Delivery
+.get-more-container {
+  margin-top: $line-height-computed;
+}
+
+.inpost-logo {
+  max-height: 50px;
+  float: right;
+}
+
+// Updated credit-card image
+#credit-card-image {
+  margin-top: -10px;
+}
+
+.existing-credit-card-list td {
+  padding: 5px;
+}
+
+// Form labels
+
+.soft-label {
+  display: inline;
+  font-weight: normal;
+}
+
+@import "bootstrap";
+@import "font-awesome";

@@ -1,0 +1,6 @@
+<% if order.shipments.first.selected_shipping_rate.name == "Paczkomaty InPost" %>
+  <tr>
+    <td colspan="5"><%= @machine_info %></td>
+    <td class="text-center"><%= @inpost_machine %></td>
+  <tr>
+<% end %>

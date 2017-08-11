@@ -1,0 +1,19 @@
+<div>
+    <% if payment_method.description == "cash" %>
+      <p>
+        Odbiór osobisty możliwy jest w Poznaniu przy ulicy Filareckiej 3/2, od poniedziałku do piątku w godzinach 9:00-17:00, po wcześniejszym umówieniu się.
+      </p>
+    <% elsif payment_method.description == "bank_transfer" %>
+      <p>
+        Prosimy o wpłatę bezpośrednio na nasze konto bankowe. Proszę użyć numeru zamówienia jako tytułu płatności. Twoje zamówienie zostanie zrealizowane po zaksięgowaniu wpłaty na naszym koncie.
+      </p>
+      <p>
+        Dane do przelewu:</br>
+        </br>
+        Magdalena Zatorska FFE</br>
+        ul. Filarecka 3/2, 61-502 Poznań</br>
+        NIP: 5562629912</br>
+        KONTO: mBank  92 1140 2004 0000 3002 7677 6082
+      </p>
+    <% end %>
+</div>

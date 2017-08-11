@@ -1,0 +1,37 @@
+@import "variables";
+
+.panel {
+  border: none;
+  box-shadow: none;
+  .product-body {
+    height: 240px;
+  }
+  .panel-footer {
+    border: none;
+  }
+}
+
+.well {
+  background-color: #fff;
+  border: none;
+  box-shadow: none;
+}
+
+#product-variants {
+  ul {
+    list-style: none;
+  }
+}
+
+.panel-body a img {
+  max-width: 240px;
+}
+
+#product-description {
+  a {
+    color: $niagara;
+    &:hover, &:focus {
+      color: $nav-link-hover-color;
+    }
+  }
+}

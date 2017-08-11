@@ -1,0 +1,58 @@
+<% @body_id = 'cart' %>
+<div data-hook="cart_container">
+  <div class="container">
+    <h1 id="cart_header"><%= Spree.t(:shopping_cart) %></h1>
+    <div id="continue_shopping" data-hook>
+          <%= link_to Spree.t(:continue_shopping), products_path, class: 'btn btn-default' %>
+    </div>
+  </div>
+  <% if @order.line_items.empty? %>
+    <div data-hook="empty_cart">
+      <div class="alert alert-info"><%= Spree.t(:your_cart_is_empty) %></div>
+      <p><%= link_to Spree.t(:continue_shopping), products_path, class: 'btn btn-default' %></p>
+    </div>
+  <% else %>
+    <div data-hook="outside_cart_form">
+      <%= form_for @order, url: update_cart_path, html: { id: 'update-cart' } do |order_form| %>
+        <div data-hook="inside_cart_form">
+
+          <div data-hook="cart_items">
+            <%= render partial: 'form', locals: { order_form: order_form } %>
+          </div>
+
+          <div class="container" id="additional_info">
+            <div class="form-group col-xs-12 col-sm-6 col-md-5">
+              <%= order_form.label Spree.t(:additional_info) %>
+              <%= order_form.text_area :additional_info, placeholder: "Notatka do twojego zamówienia.", class: 'form-control', size: "12x3" %>
+            </div>
+          </div>
+
+          <div class="container">
+            <div class='col-md-6 navbar-form' id="coupon_code" data-hook='coupon_code'>
+              <label>
+                <%= order_form.text_field :coupon_code, placeholder: Spree.t(:coupon_code), class: 'form-control' %>
+                <%= button_tag Spree.t(:coupon_code_apply), class: 'btn btn-default' %>
+              </label>
+            </div>
+
+            <div class="links col-md-3 navbar-form pull-right" data-hook="cart_buttons">
+              <div class="form-group">
+                <%= button_tag class: 'btn btn-primary', id: 'update-button' do %>
+                  <%= Spree.t(:update) %>
+                <% end %>
+                <%= button_tag class: 'btn btn-lg btn-success', id: 'checkout-link', name: 'checkout' do %>
+                  <%= Spree.t(:checkout) %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  Spree.current_order_id = "<%= @order.number %>"
+  Spree.current_order_token = "<%= @order.guest_token %>"
+</script>
