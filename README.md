@@ -1,3 +1,3 @@
-# README
+Shop built with Ruby and Rails and Spree Commerce
 
-Repository for https://www.friendsfurever.pl/
+Live version at https://fur-staging.herokuapp.com/
